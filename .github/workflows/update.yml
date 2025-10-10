@@ -21,11 +21,43 @@ jobs:
 
       - name: Update registry
         run: go run ./scripts/update_registry.go
-        
+
       - name: Commit changes
         run: |
           git config user.name "github-actions"
           git config user.email "actions@users.noreply.github.com"
           git add registry.json
           git commit -m "Update registry via dispatch" || echo "No changes"
+          git push
+
+      - name: Create app token (website access)
+        id: app
+        uses: actions/create-github-app-token@v2
+        with:
+          app-id: ${{ secrets.DRAGON_APP_ID }}
+          private-key: ${{ secrets.DRAGON_APP_PRIVATE_KEY }}
+          owner: getDragon-dev
+          repositories: dragon-website
+
+      - name: Checkout dragon-website
+        uses: actions/checkout@v4
+        with:
+          repository: getDragon-dev/dragon-website
+          token: ${{ steps.app.outputs.token }}
+          path: website
+
+      - name: Copy registry.json to website
+        run: |
+          mkdir -p website/static
+          cp registry.json website/static/registry.json
+          mkdir -p website/data
+          cp registry.json website/data/registry.json
+      
+      - name: Commit & push (website)
+        working-directory: website
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@users.noreply.github.com"
+          git add static/registry.json data/registry.json || git add static/registry.json
+          git commit -m "Sync registry.json for $TAG"
           git push
