@@ -22,7 +22,7 @@ import (
 	"strings"
 	"time"
 
-	"go.yaml.in/yaml/v3"
+    "gopkg.in/yaml.v3"
 )
 
 type Blueprint struct {
@@ -62,6 +62,11 @@ func saveDB(p string, db Database) error {
 	if db.Blueprints == nil {
 		db.Blueprints = []Blueprint{}
 	}
+    for i := range db.Blueprints {
+        if db.Blueprints[i].Tags == nil {
+            db.Blueprints[i].Tags = []string{}
+        }
+    }
 	b, err := json.MarshalIndent(db, "", "  ")
 	if err != nil {
 		return err
@@ -137,8 +142,10 @@ func main() {
 		}
 		name := strings.TrimSuffix(a.Name, ".zip")
 		// Fetch manifest.yaml from the repo at this tag
-		manifestURL := fmt.Sprintf("https://raw.githubusercontent.com/%s/%s/%s/%s",
-			repo, tag, path.Join("blueprints", name, "manifest.yaml"), "")
+		manifestURL := fmt.Sprintf(
+            "https://raw.githubusercontent.com/%s/%s/%s",
+            repo, tag, path.Join("blueprints", name, "manifest.yaml"),
+        )
 		mb, err := httpGet(ctx, manifestURL)
 		var man bpManifest
 		if err == nil {
