@@ -2,12 +2,15 @@
   "blueprints": [
     {
       "name": "cli-tool",
-      "version": "0.0.5",
+      "version": "1.0.0",
       "repo": "github.com/getDragon-dev/dragon-blueprints",
       "path": "blueprints/cli-tool",
-      "download_url": "https://github.com/getDragon-dev/dragon-blueprints/releases/download/v0.0.5/cli-tool.zip",
-      "description": "cli-tool blueprint",
-      "tags": null
+      "download_url": "https://github.com/getDragon-dev/dragon-blueprints/releases/download/v0.0.6/cli-tool.zip",
+      "description": "Cobra CLI starter.",
+      "tags": [
+        "go",
+        "cli"
+      ]
     }
   ]
 }
