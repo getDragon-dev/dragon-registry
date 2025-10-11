@@ -5,7 +5,7 @@
       "version": "1.0.0",
       "repo": "github.com/getDragon-dev/dragon-blueprints",
       "path": "blueprints/cli-tool",
-      "download_url": "https://github.com/getDragon-dev/dragon-blueprints/releases/download/v0.1.0/cli-tool.zip",
+      "download_url": "https://github.com/getDragon-dev/dragon-blueprints/releases/download/v0.1.1/cli-tool.zip",
       "description": "Cobra CLI starter.",
       "tags": [
         "go",
@@ -17,7 +17,7 @@
       "version": "1.0.0",
       "repo": "github.com/getDragon-dev/dragon-blueprints",
       "path": "blueprints/api-service",
-      "download_url": "https://github.com/getDragon-dev/dragon-blueprints/releases/download/v0.1.0/api-service.zip",
+      "download_url": "https://github.com/getDragon-dev/dragon-blueprints/releases/download/v0.1.1/api-service.zip",
       "description": "API service with selectable router and DB (native or GORM), Viper config, and migrations folder.",
       "tags": [
         "go",
